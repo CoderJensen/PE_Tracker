@@ -16,8 +16,7 @@ express()
   .use(express.urlencoded({ extended: true }))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .get('/db', async (req, res) => {
+  .get('/', async(req, res) => {
     try {
       const client = await pool.connect();
     
