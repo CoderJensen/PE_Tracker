@@ -71,7 +71,7 @@ ORDER BY c.relname, a.attnum;
       const client = await pool.connect();
       const usersId = req.body.users_id;
       const studentsId = req.body.students_id;
-      const tasksId = req.body.tasks_Id;
+      const tasksId = req.body.tasks_id;
       const duration = req.body.duration;
       const sqlInsert = await client.query(
 `INSERT INTO observations (users_id, students_id, tasks_id, duration)
