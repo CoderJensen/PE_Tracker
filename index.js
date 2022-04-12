@@ -63,7 +63,7 @@ ORDER BY c.relname, a.attnum;
     }
     catch (err) {
       console.error(err);
-      res.send("Error: " + err)
+      res.send("Error: " + err);
     }
   })
   .post('/log', async(req, res) => {
