@@ -8,12 +8,23 @@
   <h1>PE Tracker</h1>
   <% tasks.forEach(function(r) { %>
     <button id='<%= r.id %>'
-      onClick="javascript:logTask(<%= r.id %>);"><%= r.name %></button>
+      onClick="javascript:logTask(<%= r.id %>);"><%= r.name %></button><br>
+    <input id="<%= r.id %>minutes" type="number" value="0" min="0" max="60" onkeydown="return false">
+    <label for="<%= r.id %>minutes">Minutes</label><br>
+    <input id="<%= r.id %>seconds" type="number" value="00" min="0" max="60" onkeydown="return false">
+    <label for="<%= r.id %>seconds">Seconds</label><br><br>
   <% }); %>
   <script>
 let currentTaskId = null;
 
 const logTask = async function(id) {
+  var someMins = id + "minutes";
+  var someSecs = id + "seconds";
+
+  var minutes = document.getElementById(someMins).value;
+  var seconds = document.getElementById(someSecs).value;
+  var duration = "'+00:" + minutes + ":" + seconds + "'";
+
   const response = await fetch('/log', {
     method: 'POST',
     headers: {
@@ -24,7 +35,7 @@ const logTask = async function(id) {
       users_id: -1,
       students_id: -1,
       tasks_id: id,
-      duration: "'+0:01'"
+      duration: duration
     })
   });
   const result = await response.json();

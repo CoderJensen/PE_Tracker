@@ -1,3 +1,5 @@
+// jshint esversion: 8
+
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
@@ -51,7 +53,9 @@ ORDER BY c.relname, a.attnum;
 `);
 
       const obs = await client.query(
-`SELECT * FROM observations`);
+`SELECT * 
+FROM observations AS o
+INNER JOIN tasks AS t ON o.tasks_id = t.id`);
 
       const locals = {
         'tables': (tables) ? tables.rows : null,
